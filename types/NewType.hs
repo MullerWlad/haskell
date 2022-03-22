@@ -1,3 +1,4 @@
+{-# OPTIONS_GHC -Wno-missing-fields #-}
 module NewType
 (Point(..), Shape(..), area)
 where
@@ -18,7 +19,6 @@ area (Rectangle (Point x1 y1) (Point x2 y2)) = (abs $ x2 - x1) * (abs $ y2 - y1)
 
 
 -- data Person = Person String String Int Float String String deriving (Show)
-
 -- firstName :: Person –> String
 -- firstName (Person firstname _ _ _ _ _) = firstname
 -- lastName :: Person –> String
@@ -51,3 +51,16 @@ data Car = Car {
 data Vector a = Vector a a a deriving(Show)
 vplus :: (Num a) => Vector a -> Vector a -> Vector a
 vplus (Vector i j k) (Vector a b c) = Vector(i + a) (j + b) (k + c)
+
+
+data Anime = Syonen {
+    mainCh :: String,
+    mainEnemy :: String
+} | Etti {
+    mainCh :: String,
+    girls :: [String]
+} deriving (Show, Eq)
+
+
+-- demonsSlayer :: Anime
+-- demonsSlayer = Syonen {mainCh = "Tanjiro", mainEnemy = "Mudzan"}

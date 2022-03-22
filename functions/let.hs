@@ -1,6 +1,7 @@
 vCilinder :: Floating a => a -> a -> a
 vCilinder r h = 
-    let sBottom = pi * r * r
+    let sBottom = pi * let square x = x * x 
+            in square r
     in sBottom * h
 
 squares :: (Integer, Integer) -> (Integer, Integer)

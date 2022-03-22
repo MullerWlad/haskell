@@ -22,14 +22,24 @@ third :: (Num a) => (a, a, a) -> a
 third (_, _, a) = a
 
 addHead :: Integer -> [Integer]
-addHead x = x:addHead(x + 1)
+addHead x = x : addHead(x + 1)
 
+-- named template starts with @: example name@(something)
 firstLetter :: String -> String
 firstLetter "" = "Упс, пустая строка!"
-firstLetter all@(x:xs) = "Первая буква строки " ++ all ++ " это " ++ [x]
+firstLetter all@(x : xs) = "Первая буква строки " ++ all ++ " это " ++ [x]
 
 closureZ :: Integer -> Integer -> [Integer]
-closureZ x 0 = 0:closureZ x 1
-closureZ x n = (n * x):((-n) * x):closureZ x (n + 1)
+closureZ x 0 = 0 : closureZ x 1
+closureZ x n = (n * x) : ((-n) * x) : closureZ x (n + 1)
+
 buildClosureZ :: Integer -> [Integer]
 buildClosureZ x = closureZ x 0
+
+
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2
+
+
+-- ($) :: (a -> b) -> a -> b

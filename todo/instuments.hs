@@ -18,6 +18,7 @@ summList (x:xs) = x + summList xs
 justFun :: Num a => [a] -> [a]
 justFun = map (\t -> t * t)
 
+declareThrow :: Integer -> Integer
 declareThrow = \t -> t * t
 
 -- declare flip'

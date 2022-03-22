@@ -6,6 +6,7 @@
 -- in other words 
 -- instance Functor [] where
 --      fmap = map
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
 
 data Tree a = Empty | Node a (Tree a) (Tree a)
     deriving(Eq)
@@ -14,6 +15,7 @@ data Tree a = Empty | Node a (Tree a) (Tree a)
 treeMap :: (a -> b) -> Tree a -> Tree b 
 treeMap f (Node x left right) = Node (f x) (treeMap f left) (treeMap f right)
 -- define the instance of Tree
+-- not a (Tree a), because (Tree a) is a type, but we need a constructor of types
 instance Functor Tree where
     fmap f Empty = Empty
     fmap f (Node x left right) = Node (f x) (fmap f left) (fmap f right)
@@ -40,3 +42,21 @@ data Frank a b = Frank {
 -- :k Frank => * -> (* -> *) -> *, because of carring
 
 
+-- using types for
+class TestClass a where
+    testMethod :: a -> a
+
+data TestType a = TestConstructor a | Test
+
+-- used instance for TestType a :k *, TestClass :k * -> Constraint
+-- but not for TestType :k * -> *
+instance TestClass (TestType a) where
+    testMethod (TestConstructor a) = Test
+
+-- using construcor of types for 
+class TestClass' type' where
+    testMethod' :: a -> type' a
+
+-- used instance for TestClass' :k (* -> *) -> Constraint, TestType :k * -> *
+instance TestClass' TestType where
+    testMethod' = TestConstructor

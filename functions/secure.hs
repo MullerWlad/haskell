@@ -1,4 +1,4 @@
-sayX :: String -> String 
+sayX :: String -> String
 sayX animal
     | animal == "Cow" = "Muuu"
     | animal == "Kat" = "Meow"
@@ -13,7 +13,8 @@ neuronExperiencer repl
     | repl == "Shit" = -1
     | repl == "Fuck you" = -2
     | otherwise = 0
-neuronResulter :: Integer -> String 
+
+neuronResulter :: Integer -> String
 neuronResulter exp
     | exp < -10 = "You're bad human"
     | exp < -30 = "Fuck you"
@@ -22,9 +23,10 @@ neuronResulter exp
     | exp > 30 = "What's up"
     | exp > 50 = "I love you <3"
     | otherwise = "..."
+
 summator :: [String] -> Integer
 summator [] = 0
-summator (x:xs) = (neuronExperiencer x) + (summator xs)
+summator (x:xs) = (neuronExperiencer x) + summator xs
 
 saySomething :: [String] -> String
 saySomething moments = neuronResulter (summator moments)
